@@ -27,12 +27,26 @@ export const getParcel = async (req, res) => {
       },
     });
     console.log(parcel);
-    res.json(parcel ? null : { message: "Parcel not found." });
+    res.json(parcel ? parcel : { message: "Parcel not found." });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
+export const getParcelByUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const parcels = await Parcel.findAll({
+      where: {
+        id_user: id,
+      },
+    });
+    console.log(parcels);
+    res.json(parcels ? parcels : { message: "Parcel not found." });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 export const createParcel = async (req, res) => {
   try {
     const { user_id, capacity, location, people_price, description, title } =
