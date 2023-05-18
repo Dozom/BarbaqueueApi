@@ -108,6 +108,7 @@ export const updateParcel = async (req, res) => {
   }
 };
 
+// delete
 export const deleteParcel = async (req, res) => {
   try {
     const { id } = req.params;
