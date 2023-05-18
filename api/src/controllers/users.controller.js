@@ -26,10 +26,10 @@ export const getUser = async (req, res) => {
         id,
       },
     });
-    console.log(user);
-    res.json(user ? null : { message: "User not found." });
+
+    res.json(user ? user : { message: "User not found." });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ message: "User not found" });
   }
 };
 
