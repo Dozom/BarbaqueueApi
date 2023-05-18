@@ -33,6 +33,7 @@ export const getParcel = async (req, res) => {
   }
 };
 
+// GET by User Id
 export const getParcelByUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -47,6 +48,8 @@ export const getParcelByUser = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+// POST Parcel
 export const createParcel = async (req, res) => {
   try {
     const { user_id, capacity, location, people_price, description, title } =
@@ -85,38 +88,42 @@ export const createParcel = async (req, res) => {
   }
 };
 
+// PUT Parcel
 export const updateParcel = async (req, res) => {
   try {
-    /*    const { id } = req.params;
-    const { userId, capacity, location, peoplePrice, description, title } =
+    const { id } = req.params;
+    const { user_id, capacity, location, people_price, description, title } =
       req.body;
-    let reqCapacity = new Capacity(capacity);
-    let reqTitle = new Title(title);
-    let reqDescription = new Description(description);
-    let reqUserId = new IdUser(userId);
-    let reqLocation = new LocationString(location);
-    let reqPeoplePrice = new PeoplePrice(peoplePrice);
+
+    let parcelData = new ParcelData();
+    parcelData.title = new TitleString(title).values;
+    parcelData.user_id = new IdUser(user_id).values;
+    parcelData.location = new LocationString(location).values;
+    parcelData.people_price = new PeoplePrice(people_price).values;
+    parcelData.capacity = new Capacity(capacity).values;
+    parcelData.description = new Description(description).values;
+
     const parcelExists = await Parcel.findAll({
       where: {
-        title: reqTitle.Title,
+        title: parcelData.title,
       },
     });
+
     if (parcelExists.length > 0) {
       return res.json({ message: "Parcel Already Exists" });
     }
 
-    // update
+    // Update
     const parcel = await Parcel.findByPk(id);
-    console.log("response: " + parcel);
-    parcel.title = reqTitle.Title;
-    parcel.description = reqDescription.Description;
-    parcel.user_id = reqUserId.IdUser;
-    parcel.location = reqLocation.LocationString;
-    parcel.capacity = reqCapacity.capacity;
-    parcel.people_price = reqPeoplePrice.PeoplePrice;
+    parcel.title = parcelData.title;
+    parcel.description = parcelData.description;
+    parcel.id_user = parcelData.user_id;
+    parcel.location = parcelData.location;
+    parcel.capacity = parcelData.capacity;
+    parcel.people_price = parcelData.people_price;
     parcel.save();
-    */
-    res.send("Parcel Updated With Id: ");
+
+    res.json({ message: "Parcel Updated With Id: " + parcel.id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
