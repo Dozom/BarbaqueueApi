@@ -7,6 +7,8 @@ import TitleString from "../DomainValues/Parcel/TitleString.js";
 import LocationString from "../DomainValues/Parcel/LocationString.js";
 import Billing from "../models/Billing.js";
 import ParcelId from "../DomainValues/Billing/ParcelId.js";
+import BillingData from "../requestObjects/BillingData.js";
+import birthDate from "../DomainValues/User/BirthDate.js";
 
 export const getBillings = async (req, res) => {
   try {
@@ -17,35 +19,26 @@ export const getBillings = async (req, res) => {
   }
 };
 
-export const getParcel = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const parcel = await Parcel.findOne({
-      where: {
-        id,
-      },
-    });
-    console.log(parcel);
-    res.json(parcel ? null : { message: "Parcel not found." });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
 export const createBilling = async (req, res) => {
   try {
-    const { userId, parcelId } = req.body;
-    let reqUserId = new IdUser(userId);
-    let reqParcelId = new ParcelId(parcelId);
+    const { user_id, parcel_id, date, total_price, people_amount } = req.body;
+
+    let billingData = new BillingData();
+    billingData.user_id = new IdUser(user_id).values;
+    billingData.parcel_id = new ParcelId(parcel_id).values;
+    billingData.date = new birthDate(date).values;
+    billingData.total_price = new PeoplePrice(total_price).values;
+    billingData.people_amount = new Capacity(people_amount).values;
 
     const newBilling = await Billing.create({
-      user_id: reqUserId.IdUser,
-      parcel_id: reqParcelId.parcelId,
-      people_amount: 12,
-      total_price: 23,
+      user_id: billingData.user_id,
+      parcel_id: billingData.parcel_id,
+      people_amount: billingData.people_amount,
+      total_price: billingData.total_price,
+      date: billingData.date,
     });
 
-    res.send("Billing Created With Id: " + newBilling.id);
+    res.json({ message: "Billing Created With Id: " + newBilling.id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

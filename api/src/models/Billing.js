@@ -21,6 +21,9 @@ const Billing = sequelize.define(
     total_price: {
       type: DataTypes.FLOAT,
     },
+    date: {
+      type: DataTypes.DATE,
+    },
   },
   {
     schema: "barbaqueue",

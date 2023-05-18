@@ -1,11 +1,11 @@
 export default class ParcelId {
-  constructor(parcelId) {
-    this.parcelId = parcelId;
+  constructor(values) {
+    this.values = values;
     this.checkEmpty();
   }
 
   checkEmpty() {
-    if (this.parcelId === 0) {
+    if (this.values === 0) {
       throw Error("Invalid parcelId");
     }
   }
