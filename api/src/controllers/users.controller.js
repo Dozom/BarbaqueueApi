@@ -8,6 +8,7 @@ import LastName from "../DomainValues/User/LastName.js";
 
 import UserData from "../requestObjects/UserData.js";
 
+// list
 export const getUsers = async (req, res) => {
   try {
     const users = await Users.findAll();
