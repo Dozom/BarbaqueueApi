@@ -1,4 +1,4 @@
-export default class UserRequest {
+export default class UserData {
   constructor() {
     this.name = null;
     this.birth_date = null;

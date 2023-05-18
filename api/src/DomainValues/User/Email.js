@@ -1,28 +1,28 @@
 export default class Email {
-  constructor(Email) {
-    this.Email = Email;
+  constructor(values) {
+    this.values = values;
     this.checkType();
     this.checkEmpty();
     this.checkMaxLength();
     this.checkInvalidInputs();
   }
   checkType() {
-    if (typeof this.Email !== "string") {
+    if (typeof this.values !== "string") {
       throw Error("Invalid Email");
     }
   }
   checkEmpty() {
-    if (this.Email === "") {
+    if (this.values === "") {
       throw Error("Empty field Email");
     }
   }
   checkMaxLength() {
-    if (this.Email.length > 250) {
+    if (this.values.length > 250) {
       throw Error("Max length Reached Email");
     }
   }
   checkInvalidInputs() {
-    if (this.Email.includes(",") || this.Email.includes("%")) {
+    if (this.values.includes(",") || this.values.includes("%")) {
       throw Error("Invalid Email");
     }
   }

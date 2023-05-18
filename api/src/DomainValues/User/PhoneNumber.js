@@ -1,27 +1,27 @@
 export default class PhoneNumber {
-  constructor(phoneNumber) {
-    this.phoneNumber = phoneNumber;
+  constructor(values) {
+    this.values = values;
     this.checkEmpty();
     this.checkMaxLength();
     this.checkInvalidInputs();
   }
   checkType() {
-    if (typeof this.Email !== "string") {
+    if (typeof this.values !== "string") {
       throw Error("Invalid Phone Number");
     }
   }
   checkEmpty() {
-    if (this.phoneNumber === "") {
+    if (this.values === "") {
       throw Error("Empty field Phone Number");
     }
   }
   checkMaxLength() {
-    if (this.phoneNumber.length > 50) {
+    if (this.values.length > 50) {
       throw Error("Max length Reached Phone Number");
     }
   }
   checkInvalidInputs() {
-    if (this.phoneNumber.includes(",") || this.phoneNumber.includes("%")) {
+    if (this.values.includes(",") || this.values.includes("%")) {
       throw Error("Invalid Phone Number");
     }
   }

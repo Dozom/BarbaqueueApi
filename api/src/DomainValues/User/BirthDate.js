@@ -1,6 +1,6 @@
 export default class birthDate {
-  constructor(birthDate) {
-    this.birthDate = birthDate;
+  constructor(values) {
+    this.values = values;
     this.checkEmpty();
     this.checkMaxLength();
     this.checkInvalidInputs();
@@ -8,23 +8,23 @@ export default class birthDate {
   }
 
   checkEmpty() {
-    if (this.birthDate === "") {
+    if (this.values === "") {
       throw Error("Empty field birthDate");
     }
   }
   checkMaxLength() {
-    if (this.birthDate.length > 50) {
+    if (this.values.length > 50) {
       throw Error("Max length Reached birthDate");
     }
   }
   checkInvalidInputs() {
-    if (this.birthDate.includes(",") || this.birthDate.includes("%")) {
+    if (this.values.includes(",") || this.values.includes("%")) {
       throw Error("Invalid birthDate");
     }
   }
   parseDate() {
     try {
-      this.birthDate = new Date(this.birthDate);
+      this.values = new Date(this.values);
     } catch (error) {
       throw Error("Invalid Date Format");
     }

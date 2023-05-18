@@ -1,23 +1,23 @@
 export default class UserName {
-  constructor(userName) {
-    this.userName = userName;
+  constructor(values) {
+    this.values = values;
     this.checkEmpty();
     this.checkMaxLength();
     this.checkInvalidInputs();
   }
 
   checkEmpty() {
-    if (this.UserName === "") {
+    if (this.values === "") {
       throw Error("Invalid Username");
     }
   }
   checkMaxLength() {
-    if (this.userName.length > 50) {
+    if (this.values.length > 50) {
       throw Error("Max length Reached Username");
     }
   }
   checkInvalidInputs() {
-    if (this.userName.includes(",") || this.userName.includes("%")) {
+    if (this.values.includes(",") || this.values.includes("%")) {
       throw Error("Invalid Username");
     }
   }

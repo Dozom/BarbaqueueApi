@@ -5,6 +5,7 @@ import PhoneNumber from "../DomainValues/User/PhoneNumber.js";
 import Email from "../DomainValues/User/Email.js";
 import Password from "../DomainValues/User/Password.js";
 import LastName from "../DomainValues/User/LastName.js";
+import UserData from "../requestObjects/UserData.js";
 
 export const getUsers = async (req, res) => {
   try {
@@ -32,19 +33,20 @@ export const getUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    const { userName, lastName, birthDate, phoneNumber, email, password } =
+    const { name, last_name, birth_date, phone_number, email, password } =
       req.body;
 
-    let reqUserName = new UserName(userName);
-    let reqUserLastName = new LastName(lastName);
-    let reqUserBirthDate = new BirthDate(birthDate);
-    let reqUserPhoneNumber = new PhoneNumber(phoneNumber);
-    let reqUserEmail = new Email(email);
-    let reqUserPassword = new Password(password);
+    let userData = new UserData();
+    userData.name = new UserName(name).values;
+    userData.last_name = new LastName(last_name).values;
+    userData.birth_date = new BirthDate(birth_date).values;
+    userData.phone_number = new PhoneNumber(phone_number).values;
+    userData.email = new Email(email).values;
+    userData.password = new Password(password).values;
 
     const user = await Users.findAll({
       where: {
-        name: userName,
+        name: userData.name,
       },
     });
 
@@ -53,12 +55,12 @@ export const createUser = async (req, res) => {
     }
 
     const newUser = await Users.create({
-      name: reqUserName.userName,
-      last_name: reqUserLastName.lastName,
-      birth_date: reqUserBirthDate.birthDate,
-      phone_number: reqUserPhoneNumber.phoneNumber,
-      email: reqUserEmail.Email,
-      password: reqUserPassword.Password,
+      name: userData.name,
+      last_name: userData.last_name,
+      birth_date: userData.birth_date,
+      phone_number: userData.phone_number,
+      email: userData.email,
+      password: userData.password,
     });
 
     res.send("User Created With Id: " + newUser.id);

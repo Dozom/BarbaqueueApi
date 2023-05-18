@@ -1,27 +1,27 @@
 export default class LastName {
-  constructor(lastName) {
-    this.lastName = lastName;
+  constructor(values) {
+    this.values = values;
     this.checkEmpty();
     this.checkMaxLength();
     this.checkInvalidInputs();
   }
   checkType() {
-    if (typeof this.Email !== "string") {
+    if (typeof this.values !== "string") {
       throw Error("Invalid LastName");
     }
   }
   checkEmpty() {
-    if (this.lastName === "") {
+    if (this.values === "") {
       throw Error("Empty field LastName");
     }
   }
   checkMaxLength() {
-    if (this.lastName.length > 50) {
+    if (this.values.length > 50) {
       throw Error("Max length Reached LastName");
     }
   }
   checkInvalidInputs() {
-    if (this.lastName.includes(",") || this.lastName.includes("%")) {
+    if (this.values.includes(",") || this.values.includes("%")) {
       throw Error("Invalid LastName");
     }
   }
