@@ -130,7 +130,7 @@ export const deleteUser = async (req, res) => {
         id,
       },
     });
-    res.status(204).json(`User with id: ${id} deleted.`);
+    res.status(204).json({ message: "User deleted with Id: " + id });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
