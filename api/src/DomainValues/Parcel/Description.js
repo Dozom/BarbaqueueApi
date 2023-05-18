@@ -1,23 +1,23 @@
 export default class Description {
-  constructor(Description) {
-    this.Description = Description;
+  constructor(values) {
+    this.values = values;
     this.checkEmpty();
     this.checkMaxLength();
     this.checkInvalidInputs();
   }
 
   checkEmpty() {
-    if (this.Description === "") {
+    if (this.values === "") {
       throw Error("Empty field Description");
     }
   }
   checkMaxLength() {
-    if (this.Description.length > 150) {
+    if (this.values.length > 150) {
       throw Error("Max length Reached Description");
     }
   }
   checkInvalidInputs() {
-    if (this.Description.includes(",") || this.Description.includes("%")) {
+    if (this.values.includes(",") || this.values.includes("%")) {
       throw Error("Invalid Description");
     }
   }

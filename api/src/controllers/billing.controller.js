@@ -3,7 +3,7 @@ import Capacity from "../DomainValues/Parcel/Capacity.js";
 import IdUser from "../DomainValues/Parcel/IdUser.js";
 import PeoplePrice from "../DomainValues/Parcel/PeoplePrice.js";
 import Description from "../DomainValues/Parcel/Description.js";
-import Title from "../DomainValues/Parcel/Title.js";
+import TitleString from "../DomainValues/Parcel/TitleString.js";
 import LocationString from "../DomainValues/Parcel/LocationString.js";
 import Billing from "../models/Billing.js";
 import ParcelId from "../DomainValues/Billing/ParcelId.js";
@@ -57,7 +57,7 @@ export const updateParcel = async (req, res) => {
     const { userId, capacity, location, peoplePrice, description, title } =
       req.body;
     let reqCapacity = new Capacity(capacity);
-    let reqTitle = new Title(title);
+    let reqTitle = new TitleString(title);
     let reqDescription = new Description(description);
     let reqUserId = new IdUser(userId);
     let reqLocation = new LocationString(location);
@@ -81,6 +81,7 @@ export const updateParcel = async (req, res) => {
     parcel.capacity = reqCapacity.capacity;
     parcel.people_price = reqPeoplePrice.PeoplePrice;
     parcel.save();
+
     res.send("Parcel Updated With Id: " + id);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -1,11 +1,11 @@
 export default class PeoplePrice {
-  constructor(PeoplePrice) {
-    this.PeoplePrice = PeoplePrice;
+  constructor(values) {
+    this.values = values;
     this.checkEmpty();
   }
 
   checkEmpty() {
-    if (this.PeoplePrice === 0) {
+    if (this.values === 0) {
       throw Error("0 euros for people is not allowed");
     }
   }

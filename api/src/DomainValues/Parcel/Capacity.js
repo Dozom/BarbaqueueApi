@@ -1,23 +1,23 @@
 export default class Capacity {
-  constructor(Capacity) {
-    this.Capacity = Capacity;
+  constructor(values) {
+    this.values = values;
     this.checkEmpty();
     this.checkMaxLength();
     this.checkInvalidInputs();
   }
 
   checkEmpty() {
-    if (this.Capacity === 0) {
+    if (this.values === 0) {
       throw Error("Not allowed for 0 people");
     }
   }
   checkMaxLength() {
-    if (this.Capacity > 100) {
+    if (this.values > 100) {
       throw Error("Not allowed for more than 100 Persons");
     }
   }
   checkInvalidInputs() {
-    if (typeof this.Capacity === "string") {
+    if (typeof this.values === "string") {
       throw Error("Invalid Capacity");
     }
   }

@@ -1,17 +1,17 @@
 export default class LocationString {
-  constructor(LocationString) {
-    this.LocationString = LocationString;
+  constructor(values) {
+    this.values = values;
     this.checkEmpty();
     this.checkMaxLength();
   }
 
   checkEmpty() {
-    if (this.LocationString === "") {
+    if (this.values === "") {
       throw Error("Empty field Location");
     }
   }
   checkMaxLength() {
-    if (this.LocationString.length > 250) {
+    if (this.values.length > 250) {
       throw Error("Max length Reached Location");
     }
   }
