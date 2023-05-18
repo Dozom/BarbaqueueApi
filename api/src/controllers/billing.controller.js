@@ -9,10 +9,27 @@ import Billing from "../models/Billing.js";
 import ParcelId from "../DomainValues/Billing/ParcelId.js";
 import BillingData from "../requestObjects/BillingData.js";
 import birthDate from "../DomainValues/User/BirthDate.js";
+import { where } from "sequelize";
 
 export const getBillings = async (req, res) => {
   try {
     const billings = await Billing.findAll();
+    res.json(billings);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+export const findBillingsByParcelId = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const billings = await Billing.findAll({
+      where: {
+        parcel_id: id,
+      },
+    });
+
     res.json(billings);
   } catch (error) {
     res.status(400).json({ message: error.message });
