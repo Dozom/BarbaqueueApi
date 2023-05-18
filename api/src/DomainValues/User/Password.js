@@ -5,6 +5,7 @@ export default class Password {
     this.checkMaxLength();
     this.checkInvalidInputs();
   }
+
   checkType() {
     if (typeof this.values !== "string") {
       throw Error("Invalid Password");
