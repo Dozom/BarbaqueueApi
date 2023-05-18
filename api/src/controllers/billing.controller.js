@@ -9,7 +9,6 @@ import Billing from "../models/Billing.js";
 import ParcelId from "../DomainValues/Billing/ParcelId.js";
 import BillingData from "../requestObjects/BillingData.js";
 import birthDate from "../DomainValues/User/BirthDate.js";
-import { where } from "sequelize";
 
 export const getBillings = async (req, res) => {
   try {
