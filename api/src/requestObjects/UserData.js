@@ -9,10 +9,10 @@ export default class UserData {
   }
   getData() {
     return {
-      name: this.userName,
-      last_name: this.lastName,
-      birth_date: this.birthDate,
-      phone_number: this.phoneNumber,
+      name: this.name,
+      last_name: this.last_name,
+      birth_date: this.birth_date,
+      phone_number: this.phone_number,
       email: this.email,
       password: this.password,
     };

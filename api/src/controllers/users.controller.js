@@ -5,6 +5,7 @@ import PhoneNumber from "../DomainValues/User/PhoneNumber.js";
 import Email from "../DomainValues/User/Email.js";
 import Password from "../DomainValues/User/Password.js";
 import LastName from "../DomainValues/User/LastName.js";
+
 import UserData from "../requestObjects/UserData.js";
 
 export const getUsers = async (req, res) => {
@@ -71,36 +72,51 @@ export const createUser = async (req, res) => {
 
 export const updateUser = async (req, res) => {
   try {
-    const { userName, lastName, birthDate, phoneNumber, email, password } =
-      req.body;
     const { id } = req.params;
 
-    let reqUserName = new UserName(userName);
-    let reqUserLastName = new LastName(lastName);
-    let reqUserBirthDate = new BirthDate(birthDate);
-    let reqUserPhoneNumber = new PhoneNumber(phoneNumber);
-    let reqUserEmail = new Email(email);
-    let reqUserPassword = new Password(password);
+    const { name, last_name, birth_date, phone_number, email, password } =
+      req.body;
 
-    const user = await Users.findByPk(id);
+    let userData = new UserData();
+    userData.name = new UserName(name).values;
+    userData.last_name = new LastName(last_name).values;
+    userData.birth_date = new BirthDate(birth_date).values;
+    userData.phone_number = new PhoneNumber(phone_number).values;
+    userData.email = new Email(email).values;
+    userData.password = new Password(password).values;
+
     const userExists = await Users.findAll({
       where: {
-        name: reqUserName.userName,
+        name: userData.name,
       },
     });
-    console.log(reqUserName);
+
     if (userExists.length > 0) {
       return res.json({ message: "User Already Exists" });
     }
+    try {
+      const user = await Users.findByPk(id);
 
-    user.name = reqUserName.userName;
-    user.last_name = reqUserLastName.lastName;
-    user.birth_date = reqUserBirthDate.birthDate;
-    user.phone_number = reqUserPhoneNumber.phoneNumber;
-    user.email = reqUserEmail.email;
-    user.password = reqUserPassword.password;
-    user.save();
-    res.send("User Updated With Id: " + id);
+      console.log("wasaaaa" + userData.name);
+
+      if (user) {
+        console.log("entered" + userData.name);
+        user.name = userData.name;
+        user.last_name = userData.last_name;
+        user.birth_date = userData.birth_date;
+        user.phone_number = userData.phone_number;
+        user.email = userData.email;
+        user.password = userData.password;
+        await user.save();
+        console.log("User saved successfully.");
+      } else {
+        console.log("User not exists.");
+      }
+    } catch (error) {
+      console.error("Error saving user:", error);
+    }
+
+    res.json({ message: "User Updated With Id: " + id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
