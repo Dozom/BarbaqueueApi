@@ -65,7 +65,7 @@ export const createUser = async (req, res) => {
       password: userData.password,
     });
 
-    res.send("User Created With Id: " + newUser.id);
+    res.send({ id: newUser.id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
