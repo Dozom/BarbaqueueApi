@@ -139,10 +139,10 @@ export const deleteUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { name, password } = req.body;
+    const { email, password } = req.body;
     const userLogged = await Users.findOne({
       where: {
-        name: name,
+        email: email,
         password: password,
       },
     });
