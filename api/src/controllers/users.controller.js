@@ -139,14 +139,18 @@ export const deleteUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { username, passweord } = req.body;
-    await Users.findAll({
+    const { name, password } = req.body;
+    const userLogged = await Users.findAll({
       where: {
-        name: username,
+        name: name,
         password: password,
       },
     });
-    res.status(200).json({ message: "ok" });
+    if (userLogged.length >= 1) {
+      res.status(200).json({ message: "ok" });
+    } else {
+      res.status(404).json({ message: "not found" });
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
