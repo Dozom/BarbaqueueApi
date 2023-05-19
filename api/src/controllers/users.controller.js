@@ -136,3 +136,18 @@ export const deleteUser = async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 };
+
+export const loginUser = async (req, res) => {
+  try {
+    const { username, passweord } = req.body;
+    await Users.findAll({
+      where: {
+        name: username,
+        password: password,
+      },
+    });
+    res.status(200).json({ message: "ok" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
