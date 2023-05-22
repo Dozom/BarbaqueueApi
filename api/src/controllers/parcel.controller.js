@@ -52,8 +52,17 @@ export const getParcelByUser = async (req, res) => {
 // POST Parcel
 export const createParcel = async (req, res) => {
   try {
-    const { user_id, capacity, location, people_price, description, title } =
-      req.body;
+    const {
+      user_id,
+      capacity,
+      location,
+      people_price,
+      description,
+      title,
+      image1,
+      image2,
+      image3,
+    } = req.body;
 
     let parcelData = new ParcelData();
     parcelData.title = new TitleString(title).values;
@@ -62,6 +71,9 @@ export const createParcel = async (req, res) => {
     parcelData.people_price = new PeoplePrice(people_price).values;
     parcelData.capacity = new Capacity(capacity).values;
     parcelData.description = new Description(description).values;
+    parcelData.image1 = image1;
+    parcelData.image2 = image2;
+    parcelData.image3 = image3;
 
     const parcel = await Parcel.findAll({
       where: {
@@ -80,6 +92,9 @@ export const createParcel = async (req, res) => {
       people_price: parcelData.people_price,
       capacity: parcelData.capacity,
       description: parcelData.description,
+      image1: parcelData.image1,
+      image2: parcelData.image2,
+      image3: parcelData.image3,
     });
 
     res.send("Parcel Created With Id: " + newParcel.id);
@@ -102,6 +117,9 @@ export const updateParcel = async (req, res) => {
     parcelData.people_price = new PeoplePrice(people_price).values;
     parcelData.capacity = new Capacity(capacity).values;
     parcelData.description = new Description(description).values;
+    parcelData.image1 = image1;
+    parcelData.image2 = image2;
+    parcelData.image3 = image3;
 
     const parcelExists = await Parcel.findAll({
       where: {
@@ -121,6 +139,10 @@ export const updateParcel = async (req, res) => {
     parcel.location = parcelData.location;
     parcel.capacity = parcelData.capacity;
     parcel.people_price = parcelData.people_price;
+    parcel.image1 = image1;
+    parcel.image2 = image2;
+    parcel.image3 = image3;
+
     parcel.save();
 
     res.json({ message: "Parcel Updated With Id: " + parcel.id });

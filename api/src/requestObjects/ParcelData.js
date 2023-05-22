@@ -6,7 +6,11 @@ export default class ParcelData {
     this.capacity = null;
     this.title = null;
     this.description = null;
+    this.image1 = null;
+    this.image2 = null;
+    this.image3 = null;
   }
+
   getData() {
     return {
       id_user: this.id_user,
@@ -15,6 +19,9 @@ export default class ParcelData {
       capacity: this.capacity,
       title: this.title,
       description: this.description,
+      image1: this.image1,
+      image2: this.image2,
+      image3: this.image3,
     };
   }
 }

@@ -27,6 +27,15 @@ const Parcel = sequelize.define(
     description: {
       type: DataTypes.STRING,
     },
+    image1: {
+      type: DataTypes.BLOB,
+    },
+    image2: {
+      type: DataTypes.BLOB,
+    },
+    image3: {
+      type: DataTypes.BLOB,
+    },
   },
   {
     schema: "barbaqueue",
