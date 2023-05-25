@@ -28,6 +28,9 @@ const User = sequelize.define(
     password: {
       type: DataTypes.STRING,
     },
+    image1: {
+      type: DataTypes.BLOB,
+    },
   },
   {
     schema: "barbaqueue",

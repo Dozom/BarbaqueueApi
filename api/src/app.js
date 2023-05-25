@@ -9,7 +9,7 @@ const app = express();
 // middlewares
 app.use(cors());
 app.use(express.json());
-
+app.use(express.urlencoded({ extended: true }));
 app.use(usersRoutes);
 app.use(parcelsRoutes);
 app.use(billingRoutes);

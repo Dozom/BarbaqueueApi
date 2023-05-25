@@ -5,7 +5,6 @@ import PhoneNumber from "../DomainValues/User/PhoneNumber.js";
 import Email from "../DomainValues/User/Email.js";
 import Password from "../DomainValues/User/Password.js";
 import LastName from "../DomainValues/User/LastName.js";
-
 import UserData from "../requestObjects/UserData.js";
 
 // list
@@ -153,11 +152,30 @@ export const loginUser = async (req, res) => {
         name: userLogged.get("name"),
         email: userLogged.get("email"),
         lastname: userLogged.get("last_name"),
+        id: userLogged.get("id"),
       });
     } else {
       res.status(404).json({ message: "not found" });
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+export const uploadUserImage = async (req, res) => {
+  const { id } = req.params;
+  const { image } = req.body;
+  try {
+    const created = await Users.create({
+      id: id,
+      image1: image,
+    });
+    if (created) {
+      console.log(image);
+    } else {
+      console.log("error");
+    }
+  } catch (error) {
+    console.log("error");
   }
 };
