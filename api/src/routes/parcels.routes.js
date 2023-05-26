@@ -12,7 +12,7 @@ const router = Router();
 router.get("/parcels", getParcels);
 router.get("/parcel/:id", getParcel);
 router.get("/parcelsUser/:id", getParcelByUser);
-router.post("/parcels", createParcel);
+router.post("/createParcel", createParcel);
 router.put("/parcel/:id", updateParcel);
 router.delete("/parcel/:id", deleteParcel);
 

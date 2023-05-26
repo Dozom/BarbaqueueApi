@@ -97,7 +97,7 @@ export const createParcel = async (req, res) => {
       image3: parcelData.image3,
     });
 
-    res.send("Parcel Created With Id: " + newParcel.id);
+    res.json({"id":newParcel.id});
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
