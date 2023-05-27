@@ -1,6 +1,7 @@
 export default class LastName {
   constructor(values) {
     this.values = values;
+    this.checkType();
     this.checkEmpty();
     this.checkMaxLength();
     this.checkInvalidInputs();
@@ -17,7 +18,7 @@ export default class LastName {
   }
   checkMaxLength() {
     if (this.values.length > 50) {
-      throw Error("Max length Reached LastName");
+      throw Error("Max Length Reached LastName");
     }
   }
   checkInvalidInputs() {

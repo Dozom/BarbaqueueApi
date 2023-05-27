@@ -7,13 +7,13 @@ export default class UserName {
   }
 
   checkEmpty() {
-    if (this.values === "") {
-      throw Error("Invalid Username");
+    if (this.values === "" || this.values === " ") {
+      throw Error("Empty field Name");
     }
   }
   checkMaxLength() {
     if (this.values.length > 50) {
-      throw Error("Max length Reached Username");
+      throw Error("Max Length Reached Username");
     }
   }
   checkInvalidInputs() {
