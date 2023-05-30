@@ -28,13 +28,13 @@ const Parcel = sequelize.define(
       type: DataTypes.STRING,
     },
     image1: {
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING,
     },
     image2: {
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING,
     },
     image3: {
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING,
     },
   },
   {

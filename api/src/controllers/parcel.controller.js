@@ -64,6 +64,7 @@ export const createParcel = async (req, res) => {
       image3,
     } = req.body;
 
+    const imagePlaceholder = "https://img001.prntscr.com/file/img001/pcWhdCFlRX-gGalmHEyz_g.png";
     let parcelData = new ParcelData();
     parcelData.title = new TitleString(title).values;
     parcelData.user_id = new IdUser(user_id).values;
@@ -71,9 +72,9 @@ export const createParcel = async (req, res) => {
     parcelData.people_price = new PeoplePrice(people_price).values;
     parcelData.capacity = new Capacity(capacity).values;
     parcelData.description = new Description(description).values;
-    parcelData.image1 = image1;
-    parcelData.image2 = image2;
-    parcelData.image3 = image3;
+    parcelData.image1 = image1 ? image1 : imagePlaceholder;
+    parcelData.image2 = image2 ? image2 : imagePlaceholder;
+    parcelData.image3 = image3 ? image3 : imagePlaceholder;
 
     const parcel = await Parcel.findAll({
       where: {
