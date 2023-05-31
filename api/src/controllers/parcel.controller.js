@@ -13,10 +13,32 @@ import User from "../models/User.js";
 export const getParcels = async (req, res) => {
   try {
     const parcels = await Parcel.findAll();
-    res.json(parcels);
+  
+    const parcelsWithUserData = await Promise.all(parcels.map(async (parcel) => {
+      const user = await User.findOne({
+        where: {
+          id: parcel.id_user,
+        },
+      });
+  
+      return {
+        ...parcel.dataValues,
+        username: user.name,
+        userlastname: user.last_name,
+        useremail: user.email
+      };
+    }));
+  
+    res.json(parcelsWithUserData);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
+/*  try {
+    const parcels = await Parcel.findAll();
+    res.json(parcels);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }*/
 };
 
 export const getParcel = async (req, res) => {

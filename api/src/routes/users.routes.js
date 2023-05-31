@@ -13,7 +13,23 @@ import multer from "multer";
 
 const router = Router();
 
+/**
+ * @swagger
+ * /users:
+ *   get:
+ *     summary: Get all users
+ *     description: Retrieve a list of all users
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items: none
+ */
 router.get("/users", getUsers);
+
 router.get("/user/:id", getUser);
 router.post("/createUser", createUser);
 router.put("/user/:id", updateUser);
