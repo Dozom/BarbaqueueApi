@@ -8,6 +8,7 @@ import TitleString from "../DomainValues/Parcel/TitleString.js";
 import LocationString from "../DomainValues/Parcel/LocationString.js";
 
 import ParcelData from "../requestObjects/ParcelData.js";
+import User from "../models/User.js";
 
 export const getParcels = async (req, res) => {
   try {
@@ -26,11 +27,24 @@ export const getParcel = async (req, res) => {
         id,
       },
     });
-    console.log(parcel);
-    res.json(parcel ? parcel : { message: "Parcel not found." });
+    const user = await User.findOne({
+      where: {
+        id: parcel.id_user,
+      },
+    });
+  
+    const parcelWithUserData = {
+      ...parcel.dataValues,
+      username: user.name,
+      userlastname: user.last_name
+    };
+  
+    const response = parcelWithUserData ? parcelWithUserData : { message: "Parcel not found." };
+    res.json(response);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
+  
 };
 
 // GET by User Id
@@ -75,6 +89,7 @@ export const createParcel = async (req, res) => {
     parcelData.image1 = image1 ? image1 : imagePlaceholder;
     parcelData.image2 = image2 ? image2 : imagePlaceholder;
     parcelData.image3 = image3 ? image3 : imagePlaceholder;
+
 
     const parcel = await Parcel.findAll({
       where: {

@@ -9,6 +9,8 @@ export default class ParcelData {
     this.image1 = null;
     this.image2 = null;
     this.image3 = null;
+    this.username = null; 
+    this.userlastname = null;
   }
 
   getData() {
@@ -22,6 +24,8 @@ export default class ParcelData {
       image1: this.image1,
       image2: this.image2,
       image3: this.image3,
-    };
+      username: this.username,
+      userlastname: this.userlastname
+      };
   }
 }
